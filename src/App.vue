@@ -1,28 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <section class="hero is-dark is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">PGConfig.org</h1>
+          <h2 class="subtitle">PostgreSQL config builder</h2>
+        </div>
+      </div>
+    </section>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>PGConfig.org</strong> code available on
+        <a href="https://github.com/pgconfig">GitHub</a>.
+      </p>
+    </div>
+  </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: {},
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
