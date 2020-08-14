@@ -6,7 +6,6 @@
         <template slot="detail" slot-scope="props">
           <div class="columns is-mobile">
             <div class="column content">
-              <!-- fazer isso algo com quotes -->
               <blockquote class="subtitle">
                 <i>{{ props.row.documentation.abstract }}</i>
               </blockquote>
@@ -26,21 +25,21 @@
                       <small>&nbsp;({{ props.row.documentation.type }})</small>
                       <p v-for="row in props.row.documentation.details" :key="row">{{ row }}</p>
                       <div class="buttons">
-                      <a :href="props.row.conf_url" target="_blank" class="button is-primary">
-                        <b-icon icon="file-document" size="is-small"></b-icon>
-                        <span>
-                          Learn more on Postgresql<strong>co.nf</strong>
-                        </span>
-                      </a>
-                      <a
-                        :href="props.row.documentation.url"
-                        target="_blank"
-                        class="button is-light"
-                      >
-                        <b-icon icon="file-document" size="is-small"></b-icon>
-                        <span>Check the docs</span>
-                      </a>
-</div>
+                        <a :href="props.row.conf_url" target="_blank" class="button is-primary">
+                          <b-icon icon="creation" size="is-small"></b-icon>
+                          <span>
+                            Learn more on Postgresql<strong>co.nf</strong>
+                          </span>
+                        </a>
+                        <a
+                          :href="props.row.documentation.url"
+                          target="_blank"
+                          class="button is-light"
+                        >
+                          <b-icon icon="file-document" size="is-small"></b-icon>
+                          <span>Check the docs</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -104,13 +103,24 @@ export default {
     console.log(this.$http);
     this.$emit("isLoading", true);
     try {
-      const response = await this.$http.get(
-        "/get-config-all-environments?show_doc=true&arch=x86-64&cpus=1&drive_type=SSD&environment_name=WEB&format=json&max_connections=100&os_type=Linux&pg_version=12&total_ram=2GB"
-      );
+      const response = await this.$http
+        .get(
+          "/get-config-all-environments?show_doc=true&arch=x86-64&cpus=1&drive_type=SSD&environment_name=WEB&format=json&max_connections=100&os_type=Linux&pg_version=12&total_ram=2GB"
+        );
       // console.log("asdsdadasds", response);
       this.fullResponse = response.data.data;
     } catch (e) {
-      console.log(e);
+          
+          this.$buefy.dialog.alert({
+                    title: 'Error',
+                    message: 'Could not get data from the API: <pre>'+ e +'</pre>',
+                    type: 'is-danger',
+                    hasIcon: false,
+                    icon: 'times-circle',
+                    iconPack: 'fa',
+                    ariaRole: 'alertdialog',
+                    ariaModal: true
+                });
     }
     this.$emit("isLoading", false);
   },
