@@ -11,16 +11,19 @@ export const formatConfigs = configsFromBack =>
       const categoryFound = acc.find(it => it.category === category);
 
       parameters.forEach(
-        ({ name: paramName, config_value: paramValue, documentation, format }) => {
+        ({ name: paramName, config_value: paramValue, documentation  }) => {
           const paramAlreadyAdded = categoryFound.params.find(
             it => it.name === paramName
           );
 
           if (!paramAlreadyAdded) {
+
+            let conf_url = "https://postgresqlco.nf/en/doc/param/"+ paramName +"/12/";
+            
             categoryFound.params.push({
               name: paramName,
               [env.toLowerCase()]: paramValue,
-              format, documentation
+              documentation, conf_url
             });
           } else {
             const populatedParamIndex = categoryFound.params.findIndex(

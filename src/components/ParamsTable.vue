@@ -1,11 +1,55 @@
 <template>
   <section class="section" v-if="formattedConfigs.length > 0">
-    <div v-for="item in formattedConfigs" :key="item.name" class="container">
-      <h1 class="subtitle">{{ item.name }}</h1>
-      <b-table :data="item.params" :columns="columns"></b-table>
-    <!-- <pre>{{ item }}</pre> -->
+    <div v-for="item in formattedConfigs" :key="item.name" class="container content">
+      <h3 class="subtitle">{{ item.name }}</h3>
+      <b-table :data="item.params" detailed detail-key="name" :columns="columns" :hoverable="true">
+        <template slot="detail" slot-scope="props">
+          <div class="columns is-mobile">
+            <div class="column content">
+              <!-- fazer isso algo com quotes -->
+              <blockquote class="subtitle">
+                <i>{{ props.row.documentation.abstract }}</i>
+              </blockquote>
+              <p>Suggested readgings:</p>
+              <ul>
+                <li v-for="(url,desc) in props.row.documentation.recomendations" :key="desc">
+                  <a :href="url">{{ desc }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="column">
+              <div class="box">
+                <article class="media">
+                  <div class="media-content">
+                    <div class="content">
+                      <strong>{{ props.row.name }}</strong>
+                      <small>&nbsp;({{ props.row.documentation.type }})</small>
+                      <p v-for="row in props.row.documentation.details" :key="row">{{ row }}</p>
+                      <div class="buttons">
+                      <a :href="props.row.conf_url" target="_blank" class="button is-primary">
+                        <b-icon icon="file-document" size="is-small"></b-icon>
+                        <span>
+                          Learn more on Postgresql<strong>co.nf</strong>
+                        </span>
+                      </a>
+                      <a
+                        :href="props.row.documentation.url"
+                        target="_blank"
+                        class="button is-light"
+                      >
+                        <b-icon icon="file-document" size="is-small"></b-icon>
+                        <span>Check the docs</span>
+                      </a>
+</div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </template>
+      </b-table>
     </div>
-
   </section>
 </template>
 
@@ -25,50 +69,33 @@ export default {
         {
           field: "documentation.default_value",
           label: "Default Value",
+          width: "500",
         },
         {
           field: "web",
           label: "WEP",
+          width: "500",
         },
         {
           field: "oltp",
           label: "OLTP",
+          width: "500",
         },
         {
           field: "dw",
           label: "DW",
+          width: "500",
         },
         {
           field: "mixed",
           label: "Mixed",
+          width: "500",
         },
         {
           field: "desktop",
           label: "Desktop",
+          width: "500",
         },
-        // {
-        //     field: 'id',
-        //     label: 'ID',
-        //     width: '40',
-        //     numeric: true
-        // },
-        // {
-        //     field: 'first_name',
-        //     label: 'First Name',
-        // },
-        // {
-        //     field: 'last_name',
-        //     label: 'Last Name',
-        // },
-        // {
-        //     field: 'date',
-        //     label: 'Date',
-        //     centered: true
-        // },
-        // {
-        //     field: 'gender',
-        //     label: 'Gender',
-        // }
       ],
     };
   },
@@ -82,8 +109,6 @@ export default {
       );
       // console.log("asdsdadasds", response);
       this.fullResponse = response.data.data;
-
-      
     } catch (e) {
       console.log(e);
     }
