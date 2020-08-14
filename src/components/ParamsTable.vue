@@ -20,32 +20,32 @@ export default {
       fullResponse: undefined,
       columns: [
         {
-          field: "name"
+          field: "name",
         },
         {
           field: "default",
-          label: "Default Value"
+          label: "Default Value",
         },
         {
           field: "web",
-          label: "WEP"
+          label: "WEP",
         },
         {
           field: "oltp",
-          label: "OLTP"
+          label: "OLTP",
         },
         {
           field: "dw",
-          label: "DW"
+          label: "DW",
         },
         {
           field: "mixed",
-          label: "Mixed"
+          label: "Mixed",
         },
         {
           field: "desktop",
-          label: "Desktop"
-        }
+          label: "Desktop",
+        },
         // {
         //     field: 'id',
         //     label: 'ID',
@@ -69,27 +69,31 @@ export default {
         //     field: 'gender',
         //     label: 'Gender',
         // }
-      ]
+      ],
     };
   },
 
   async created() {
     console.log(this.$http);
+    this.$emit("isLoading", true);
     try {
       const response = await this.$http.get(
-        "/get-config-all-environments?arch=x86-64&cpus=1&drive_type=SSD&environment_name=WEB&format=json&max_connections=100&os_type=Linux&pg_version=12&total_ram=2GB"
+        "/get-config-all-environments?show_doc=true&arch=x86-64&cpus=1&drive_type=SSD&environment_name=WEB&format=json&max_connections=100&os_type=Linux&pg_version=12&total_ram=2GB"
       );
-      console.log("asdsdadasds", response);
+      // console.log("asdsdadasds", response);
       this.fullResponse = response.data.data;
+
+      
     } catch (e) {
       console.log(e);
     }
+    this.$emit("isLoading", false);
   },
   computed: {
     formattedConfigs() {
       if (!this.fullResponse) return [];
       return formatConfigs(this.fullResponse);
-    }
-  }
+    },
+  },
 };
 </script>

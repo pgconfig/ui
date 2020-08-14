@@ -12,7 +12,7 @@
       <div class="container">
         <h1 class="title">Tuning Advisor</h1>
         <Form />
-        <ParamsTable />
+        <ParamsTable v-on:isLoading="tableIsLoading" />
       </div>
     </section>
     <footer class="footer">
@@ -23,6 +23,7 @@
         </p>
       </div>
     </footer>
+    <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
   </div>
 </template>
 
@@ -32,10 +33,20 @@ import ParamsTable from "./components/ParamsTable.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      isLoading: false
+    }
+  },
   components: {
     Form,
     ParamsTable,
   },
+  methods: {
+    tableIsLoading(val) {
+      this.isLoading = val;
+    }
+  }
 };
 </script>
 
