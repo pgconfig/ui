@@ -11,7 +11,7 @@ export const formatConfigs = configsFromBack =>
       const categoryFound = acc.find(it => it.category === category);
 
       parameters.forEach(
-        ({ name: paramName, config_value: paramValue, format }) => {
+        ({ name: paramName, config_value: paramValue, documentation, format }) => {
           const paramAlreadyAdded = categoryFound.params.find(
             it => it.name === paramName
           );
@@ -20,7 +20,7 @@ export const formatConfigs = configsFromBack =>
             categoryFound.params.push({
               name: paramName,
               [env.toLowerCase()]: paramValue,
-              format
+              format, documentation
             });
           } else {
             const populatedParamIndex = categoryFound.params.findIndex(

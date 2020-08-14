@@ -3,9 +3,9 @@
     <div v-for="item in formattedConfigs" :key="item.name" class="container">
       <h1 class="subtitle">{{ item.name }}</h1>
       <b-table :data="item.params" :columns="columns"></b-table>
+    <!-- <pre>{{ item }}</pre> -->
     </div>
 
-    <!-- <pre>{{ data }}</pre> -->
   </section>
 </template>
 
@@ -23,7 +23,7 @@ export default {
           field: "name",
         },
         {
-          field: "default",
+          field: "documentation.default_value",
           label: "Default Value",
         },
         {
