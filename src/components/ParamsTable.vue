@@ -5,7 +5,7 @@
       <b-table :data="item.params" :columns="columns"></b-table>
     </div>
 
-    <pre>{{ data }}</pre>
+    <!-- <pre>{{ data }}</pre> -->
   </section>
 </template>
 
