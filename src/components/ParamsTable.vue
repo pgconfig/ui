@@ -57,9 +57,23 @@ import { formatConfigs } from "../services/formatters";
 
 export default {
   name: "ParamsTable",
-  props: {},
+  props: {
+    form: {
+      type: Object,
+      required: true,
+    },
+  },
+  watch: {
+    urlArgs: {
+      immediate: true,
+      async handler(args) {
+        await this.callAPI('/get-config-all-environments', 'show_doc=true&format=json', args);
+      }
+    }
+  },
   data() {
     return {
+
       fullResponse: undefined,
       columns: [
         {
@@ -98,37 +112,50 @@ export default {
       ],
     };
   },
-
-  async created() {
-    console.log(this.$http);
-    this.$emit("isLoading", true);
-    try {
-      const response = await this.$http
-        .get(
-          "/get-config-all-environments?show_doc=true&arch=x86-64&cpus=1&drive_type=SSD&environment_name=WEB&format=json&max_connections=100&os_type=Linux&pg_version=12&total_ram=2GB"
-        );
-      // console.log("asdsdadasds", response);
-      this.fullResponse = response.data.data;
-    } catch (e) {
-          
-          this.$buefy.dialog.alert({
-                    title: 'Error',
-                    message: 'Could not get data from the API: <pre>'+ e +'</pre>',
-                    type: 'is-danger',
-                    hasIcon: false,
-                    icon: 'times-circle',
-                    iconPack: 'fa',
-                    ariaRole: 'alertdialog',
-                    ariaModal: true
-                });
-    }
-    this.$emit("isLoading", false);
-  },
   computed: {
+    urlArgs() {
+      const args = Object.entries(this.form).map(function([k,v]){
+
+        if (k === "total_ram") {
+          return `${k}=${v}GB`
+        }
+
+        return `${k}=${v}`
+      });
+
+      return args.join("&")
+    },
     formattedConfigs() {
       if (!this.fullResponse) return [];
       return formatConfigs(this.fullResponse);
     },
   },
+  methods: {
+    async callAPI(url, opts, args) {
+      console.log(this.$http);
+      this.$emit("isLoading", true);
+
+      try {
+        const response = await this.$http
+          .get(
+            `${url}?${opts}&${args}`
+          );
+        this.fullResponse = response.data.data;
+      } catch (e) {
+            
+            this.$buefy.dialog.alert({
+                      title: 'Error',
+                      message: 'Could not get data from the API: <pre>'+ e +'</pre>',
+                      type: 'is-danger',
+                      hasIcon: false,
+                      icon: 'times-circle',
+                      iconPack: 'fa',
+                      ariaRole: 'alertdialog',
+                      ariaModal: true
+                  });
+      }
+      this.$emit("isLoading", false);
+    }
+  }
 };
 </script>

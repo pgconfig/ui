@@ -11,8 +11,7 @@
     <section class="section">
       <div class="container">
         <h1 class="title">Tuning Advisor</h1>
-        <Form />
-        <ParamsTable v-on:isLoading="tableIsLoading" />
+        <config-form v-on:isLoading="tableIsLoading"></config-form>
       </div>
     </section>
     <footer class="footer">
@@ -28,8 +27,7 @@
 </template>
 
 <script>
-import Form from "./components/Form.vue";
-import ParamsTable from "./components/ParamsTable.vue";
+import ConfigForm from "./components/Form.vue";
 
 export default {
   name: "App",
@@ -39,8 +37,7 @@ export default {
     }
   },
   components: {
-    Form,
-    ParamsTable,
+    ConfigForm,
   },
   methods: {
     tableIsLoading(val) {
