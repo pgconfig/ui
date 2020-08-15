@@ -1,4 +1,8 @@
-# ui
+# pgconfig.org UI
+
+This is the new UI version, wrote from scratch using vuejs.
+
+Thanks [@ramon-src](https://github.com/ramon-src) for the support and guidance on this project.
 
 ## Project setup
 ```
