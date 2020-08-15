@@ -3,8 +3,8 @@
     <section class="hero is-dark is-bold">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">PGConfig.org</h1>
-          <h2 class="subtitle">PostgreSQL config builder</h2>
+          <h1 class="title"><b-icon icon="database-marker" size="is-small"></b-icon>&nbsp;PGConfig</h1>
+          <h2 class="subtitle">PostgreSQL configuration builder</h2>
         </div>
       </div>
     </section>
