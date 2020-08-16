@@ -1,5 +1,5 @@
 <template>
-  <b-tabs position="is-right" class="block">
+  <b-tabs position="is-right" class="block" @input="updateTab">
     <b-tab-item label="Profile Comparison" icon="select-compare">
       <div v-if="formattedConfigs.length > 0">
         <div v-for="item in formattedConfigs" :key="item.name" class="container content">
@@ -60,7 +60,24 @@
       </div>
     </b-tab-item>
     <b-tab-item label="Export" icon="code-tags">
-      <pre>code goes here</pre>
+      <b-field grouped>
+        <b-field label="Export Format" label-position="inside">
+          <b-select v-model="exportForm.format" expanded>
+            <option value="alter_system">ALTER SYSTEM commands</option>
+            <option value="conf">UNIX-like config file</option>
+            <option value="json">JSON output</option>
+          </b-select>
+        </b-field>
+        <b-field label="Log Format" label-position="inside">
+          <b-select v-model="exportForm.log_format" :disabled="showLogFormat" expanded>
+            <option value="stderr">Standard Error output</option>
+            <option value="csvlog">Comma-separated values</option>
+            <option value="syslog">Syslog daemon</option>
+          </b-select>
+        </b-field>
+        <b-switch v-model="exportForm.include_pgbadger">Include PGBadger log configuration</b-switch>
+      </b-field>
+      <pre v-highlightjs="exportedResponse"><code v-bind:style="{highlightLang}"></code></pre>
     </b-tab-item>
   </b-tabs>
 </template>
@@ -77,20 +94,39 @@ export default {
     },
   },
   watch: {
+    exportArgs: {
+      immediate: true,
+      async handler(opts) {
+        const url = "/get-config";
+        await this.callAPI(url, opts, this.urlArgs);
+      },
+    },
     urlArgs: {
       immediate: true,
       async handler(args) {
-        await this.callAPI(
-          "/get-config-all-environments",
-          "show_doc=true&format=json",
-          args
-        );
+        var url = "/get-config-all-environments";
+        var opts = "show_doc=true&format=json";
+
+        // if (this.currentTab === 1) {
+        //   url = "/get-config";
+        //   opts = `format=${this.format}`;
+        //   console.log(`opts: ${opts}`);
+        // }
+
+        await this.callAPI(url, opts, args);
       },
     },
   },
   data() {
     return {
+      exportForm: {
+        format: "alter_system",
+        include_pgbadger: true,
+        log_format: "csvlog"
+      },
+      currentTab: 0,
       fullResponse: undefined,
+      exportedResponse: undefined,
       columns: [
         {
           field: "name",
@@ -102,7 +138,7 @@ export default {
         },
         {
           field: "web",
-          label: "WEP",
+          label: "WEB",
           width: "500",
         },
         {
@@ -129,6 +165,32 @@ export default {
     };
   },
   computed: {
+    showLogFormat() {
+      return !this.exportForm.include_pgbadger;
+    },
+    highlightLang() {
+
+      console.log(`format: ${this.exportForm.format}`);
+
+      if (this.exportForm.format === "alter_table") {
+        return "sql";
+      }
+
+      if (this.exportForm.format === "json") {
+        return "javascript";
+      }
+
+      return this.format;
+    },
+    exportArgs() {
+      const args = Object.entries(this.exportForm).map(function ([k, v]) {
+        if (v !== false) {
+          return `${k}=${v}`;
+        }
+      });
+
+      return args.join("&");
+    },
     urlArgs() {
       const args = Object.entries(this.form).map(function ([k, v]) {
         if (k === "total_ram") {
@@ -146,17 +208,29 @@ export default {
     },
   },
   methods: {
+    updateTab: function (index) {
+      this.currentTab = index;
+    },
     async callAPI(url, opts, args) {
-      console.log(this.$http);
       this.$emit("isLoading", true);
 
       try {
+
+        console.log(`calling ${url}?${opts}&${args} from ${this.currentTab}`);
+
         const response = await this.$http.get(`${url}?${opts}&${args}`);
+
+        if (this.currentTab == 1) {
+          this.exportedResponse = response.data;
+          this.$emit("isLoading", false);
+          return;
+        }
+
         this.fullResponse = response.data.data;
       } catch (e) {
         this.$buefy.dialog.alert({
           title: "Error",
-          message: "Could not get data from the API: <pre>" + e + "</pre>",
+          message: `Could not get data from the API: <pre>${e}</pre>`,
           type: "is-danger",
           hasIcon: false,
           icon: "times-circle",
@@ -165,6 +239,7 @@ export default {
           ariaModal: true,
         });
       }
+
       this.$emit("isLoading", false);
     },
   },
