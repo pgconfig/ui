@@ -9,12 +9,14 @@
               <blockquote class="subtitle">
                 <i>{{ props.row.documentation.abstract }}</i>
               </blockquote>
-              <p>Suggested readgings:</p>
-              <ul>
-                <li v-for="(url,desc) in props.row.documentation.recomendations" :key="desc">
-                  <a :href="url">{{ desc }}</a>
-                </li>
-              </ul>
+              <div v-if="props.row.documentation.recomendations">
+                <p>Suggested readgings:</p>
+                <ul>
+                  <li v-for="(url,desc) in props.row.documentation.recomendations" :key="desc">
+                    <a :href="url" target="_blank">{{ desc }}</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="column">
               <div class="box">
