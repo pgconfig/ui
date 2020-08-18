@@ -1,23 +1,33 @@
 <template>
   <div>
-    <b-field grouped group-multiline>
-      <b-field label="Export Format" label-position="inside">
-        <b-select v-model="exportForm.format" expanded>
-          <option value="alter_system">ALTER SYSTEM commands</option>
-          <option value="conf">UNIX-like config file</option>
-          <!-- <option value="json">JSON output</option> -->
-        </b-select>
-      </b-field>
-      <b-field label="Log Format" label-position="inside">
-        <b-select v-model="exportForm.log_format" :disabled="showLogFormat" expanded>
-          <option value="stderr">Standard Error output</option>
-          <option value="csvlog">Comma-separated values</option>
-          <option value="syslog">Syslog daemon</option>
-        </b-select>
-      </b-field>
-      <b-switch v-model="exportForm.include_pgbadger">Include PGBadger log configuration</b-switch>
-    </b-field>
-    <pre v-highlightjs="exportedResponse.output"><code :class="highlightLang"></code></pre>
+    <div class="columns is-desktop">
+      <div class="column">
+        <b-field label="Export Format" label-position="inside">
+          <b-select v-model="exportForm.format" expanded>
+            <option value="alter_system">ALTER SYSTEM commands</option>
+            <option value="conf">UNIX-like config file</option>
+            <!-- <option value="json">JSON output</option> -->
+          </b-select>
+        </b-field>
+      </div>
+      <div class="column">
+        <b-field label="Log Format" label-position="inside">
+          <b-select v-model="exportForm.log_format" :disabled="showLogFormat" expanded>
+            <option value="stderr">Standard Error output</option>
+            <option value="csvlog">Comma-separated values</option>
+            <option value="syslog">Syslog daemon</option>
+          </b-select>
+        </b-field>
+      </div>
+      <div class="column">
+        <b-switch v-model="exportForm.include_pgbadger">Include PGBadger log configuration</b-switch>
+      </div>
+    </div>
+    <div class="columns is-desktop">
+      <div class="column">
+        <pre v-highlightjs="exportedResponse.output"><code :class="highlightLang"></code></pre>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,7 +37,7 @@ export default {
   props: {
     exportedResponse: {
       type: Object,
-      required: true,  
+      required: true,
     },
   },
 
@@ -35,7 +45,7 @@ export default {
     exportForm: {
       immediate: true,
       handler(newForm) {
-        this.$emit('changingForm', newForm);
+        this.$emit("changingForm", newForm);
       },
     },
   },
@@ -53,7 +63,6 @@ export default {
       return !this.exportForm.include_pgbadger;
     },
     highlightLang() {
-
       if (this.exportForm.format === "alter_system") {
         return "sql";
       }
