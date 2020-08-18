@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-field grouped>
+    <b-field grouped group-multiline>
       <b-field label="Export Format" label-position="inside">
         <b-select v-model="exportForm.format" expanded>
           <option value="alter_system">ALTER SYSTEM commands</option>

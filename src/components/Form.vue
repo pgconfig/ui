@@ -3,7 +3,7 @@
     <div class="columns box">
       <div class="column is-three-quarters">
         <p class="bd-notification">Server</p>
-        <div class="columns is-mobile">
+        <div class="columns is-desktop">
           <div class="column">
             <b-field label="Operating system" label-position="inside">
               <b-select placeholder="Select one" v-model="form.os_type" expanded>
@@ -31,7 +31,7 @@
             </b-field>
           </div>
         </div>
-        <div class="columns is-mobile">
+        <div class="columns is-desktop">
           <div class="column">
             <b-field label="Number of CPUs" label-position="inside">
               <b-numberinput min="1" controls-position="compact" v-model="form.cpus"></b-numberinput>
@@ -43,7 +43,7 @@
             </b-field>
           </div>
           <div class="column">
-            <b-field label="Excepted connections" label-position="inside">
+            <b-field label="Max connections" label-position="inside">
               <b-numberinput min="1" controls-position="compact" v-model="form.max_connections"></b-numberinput>
             </b-field>
           </div>
