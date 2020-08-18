@@ -1,13 +1,26 @@
-export const structure = configs =>
-  configs[0].configuration.map(({ category, description: name }) => ({
-    category,
-    name,
-    params: []
-  }));
+export const createComparisonStructure = configs => {
 
-export const formatConfigs = configsFromBack =>
-  configsFromBack.reduce((acc, { configuration: config, environment: env }) => {
+  if (configs.length > 0) {
+    return configs[0].configuration.map(({ category, description: name }) => ({
+      category,
+      name,
+      params: []
+    }));
+  }
+
+  return  [];
+}
+
+export const formatConfigs = configsFromBack => {
+
+  if (configsFromBack.length <= 0) {
+    return [];
+  }
+
+  return configsFromBack.reduce((acc, { configuration: config, environment: env }) => {
     config.forEach(({ category, parameters }) => {
+
+      
       const categoryFound = acc.find(it => it.category === category);
 
       parameters.forEach(
@@ -38,4 +51,5 @@ export const formatConfigs = configsFromBack =>
       );
     });
     return acc;
-  }, structure(configsFromBack));
+  }, createComparisonStructure(configsFromBack));
+}

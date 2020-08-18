@@ -5,7 +5,7 @@
         <p class="bd-notification">Server</p>
         <div class="columns is-mobile">
           <div class="column">
-            <b-field label="Operating system">
+            <b-field label="Operating system" label-position="inside">
               <b-select placeholder="Select one" v-model="form.os_type" expanded>
                 <option value="linux">GNU/Linux Based</option>
                 <option value="windows">Windows Based</option>
@@ -14,7 +14,7 @@
             </b-field>
           </div>
           <div class="column">
-            <b-field label="Architecture">
+            <b-field label="Architecture" label-position="inside">
               <b-select placeholder="Select one" v-model="form.arch" expanded>
                 <option value="x86-64">64 Bits (x86-64)</option>
                 <option value="i686">32 Bits (i686)</option>
@@ -22,7 +22,7 @@
             </b-field>
           </div>
           <div class="column">
-            <b-field label="Storage type">
+            <b-field label="Storage type" label-position="inside">
               <b-select placeholder="Select one" v-model="form.drive_type" expanded>
                 <option value="HDD">HDD Storage</option>
                 <option value="SSD">SSD Storage</option>
@@ -33,17 +33,17 @@
         </div>
         <div class="columns is-mobile">
           <div class="column">
-            <b-field label="Number of CPUs">
+            <b-field label="Number of CPUs" label-position="inside">
               <b-numberinput min="1" controls-position="compact" v-model="form.cpus"></b-numberinput>
             </b-field>
           </div>
           <div class="column">
-            <b-field label="Total Memory (GB)">
+            <b-field label="Total Memory (GB)" label-position="inside">
               <b-numberinput min="1" controls-position="compact" v-model="form.total_ram"></b-numberinput>
             </b-field>
           </div>
           <div class="column">
-            <b-field label="Excepted connections">
+            <b-field label="Excepted connections" label-position="inside">
               <b-numberinput min="1" controls-position="compact" v-model="form.max_connections"></b-numberinput>
             </b-field>
           </div>
@@ -53,7 +53,7 @@
         <p class="bd-notification">Database</p>
         <div class="columns is-mobile">
           <div class="column">
-            <b-field label="Application profile">
+            <b-field label="Application profile" label-position="inside">
               <b-select placeholder="Select one" v-model="form.environment_name" expanded>
                 <option value="WEB">General web applications</option>
                 <option value="OLTP">ERP or long transaction applications</option>
@@ -66,8 +66,9 @@
         </div>
         <div class="columns is-mobile">
           <div class="column">
-            <b-field label="PostgreSQL Version">
+            <b-field label="PostgreSQL Version" label-position="inside">
               <b-select placeholder="Select a version" v-model="form.pg_version" expanded>
+                <!-- <option value="13">13 (beta)</option> -->
                 <option value="12">12 (Latest)</option>
                 <option value="11">11</option>
                 <option value="10">10</option>
@@ -82,26 +83,19 @@
         </div>
       </div>
     </div>
-    <div class="columns">
-      <div class="column">
-        <params-table v-on:isLoading="tableIsLoading" :form="form"></params-table>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import ParamsTable from "./ParamsTable.vue";
-
 export default {
   name: "Form",
   props: {},
-  components: {
-    ParamsTable,
-  },
-  methods: {
-    tableIsLoading(val) {
-      this.$emit("isLoading", val);
+  watch: {
+    form: {
+      immediate: true,
+      handler(newForm) {
+        this.$emit('changingForm', newForm);
+      },
     },
   },
   data() {
