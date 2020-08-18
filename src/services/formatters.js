@@ -30,13 +30,10 @@ export const formatConfigs = configsFromBack => {
           );
 
           if (!paramAlreadyAdded) {
-
-            let conf_url = "https://postgresqlco.nf/en/doc/param/"+ paramName +"/12/";
-            
             categoryFound.params.push({
               name: paramName,
               [env.toLowerCase()]: paramValue,
-              documentation, conf_url
+              documentation
             });
           } else {
             const populatedParamIndex = categoryFound.params.findIndex(

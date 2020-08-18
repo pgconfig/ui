@@ -3,7 +3,7 @@
     <div class="column">
       <b-tabs position="is-right" class="block">
         <b-tab-item label="Profile Comparison" icon="select-compare">
-          <comparison-table :fullResponse="fullResponse"></comparison-table>
+          <comparison-table :fullResponse="fullResponse" :pgVersion="pgVersion"></comparison-table>
         </b-tab-item>
         <b-tab-item label="Export" icon="code-tags">
           <export-config  v-on:changingForm="formChange" :exportedResponse="exportedResponse" ></export-config>
@@ -26,6 +26,10 @@ export default {
     },
     exportedResponse: {
       type: Object,
+      required: true,
+    },
+    pgVersion: {
+      type: String,
       required: true,
     },
   },

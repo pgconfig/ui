@@ -18,6 +18,7 @@
           v-on:changingForm="formExportChange"
           :fullResponse="fullResponse"
           :exportedResponse="exportedResponse"
+          :pgVersion="pgVersion"
         ></tabs>
       </div>
     </section>
@@ -71,10 +72,12 @@ export default {
     },
   },
   computed: {
+    pgVersion() {
+      if(!this.form) return '';
+      return this.form.pg_version.toString();
+    },
     urlArgs() {
-      if (!this.form) {
-        return "";
-      }
+      if (!this.form) return '';
 
       const args = Object.entries(this.form).map(function ([k, v]) {
         if (k === "total_ram") {

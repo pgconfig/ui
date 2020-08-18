@@ -25,11 +25,14 @@
                       <small>&nbsp;({{ props.row.documentation.type }})</small>
                       <p v-for="row in props.row.documentation.details" :key="row">{{ row }}</p>
                       <div class="buttons">
-                        <a :href="props.row.conf_url" target="_blank" class="button is-primary">
+                        <a
+                          :href="confURL(props.row.name)"
+                          target="_blank"
+                          class="button is-primary"
+                        >
                           <b-icon icon="creation" size="is-small"></b-icon>
                           <span>
-                            Learn more on Postgresql
-                            <strong>co.nf</strong>
+                            Learn more on Postgresql<strong>co.nf</strong>
                           </span>
                         </a>
                         <a
@@ -61,6 +64,10 @@ export default {
   props: {
     fullResponse: {
       type: Array,
+      required: true,
+    },
+    pgVersion: {
+      type: String,
       required: true,
     },
   },
@@ -108,6 +115,11 @@ export default {
     formattedConfigs() {
       if (!this.fullResponse) return [];
       return formatConfigs(this.fullResponse);
+    },
+  },
+  methods: {
+    confURL(param) {
+      return `https://postgresqlco.nf/en/doc/param/${param}/${this.pgVersion}/`;
     },
   },
 };
