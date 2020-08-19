@@ -28,10 +28,24 @@
         <pre v-highlightjs="exportedResponse.output"><code :class="highlightLang"></code></pre>
       </div>
     </div>
+
+    <div class="columns is-desktop">
+      <div class="column">
+        <b-button
+          type="button"
+          v-clipboard:copy="exportedResponse.output"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+        >
+          <b-icon icon="content-copy" size="is-small"></b-icon>Copy to clipboard
+        </b-button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+// https://github.com/Inndy/vue-clipboard2
 export default {
   name: "ExportConfig",
   props: {
@@ -57,6 +71,18 @@ export default {
         log_format: "csvlog",
       },
     };
+  },
+  methods: {
+    onCopy: function () {
+      this.$buefy.snackbar.open({
+        message: `Copied to clipboard`,
+        actionText: null,
+        type: "is-info",
+      });
+    },
+    onError: function (e) {
+      alert(`Failed to copy texts: ${e}`);
+    },
   },
   computed: {
     showLogFormat() {
