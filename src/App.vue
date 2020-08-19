@@ -19,6 +19,7 @@
           :fullResponse="fullResponse"
           :exportedResponse="exportedResponse"
           :pgVersion="pgVersion"
+          :currentEnv="currentEnv"
         ></tabs>
       </div>
     </section>
@@ -75,6 +76,10 @@ export default {
     pgVersion() {
       if(!this.form) return '';
       return this.form.pg_version.toString();
+    },
+    currentEnv() {
+      if(!this.form) return '';
+      return this.form.environment_name;
     },
     urlArgs() {
       if (!this.form) return '';

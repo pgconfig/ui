@@ -72,11 +72,15 @@ export default {
       type: String,
       required: true,
     },
+    currentEnv: {
+      type: String,
+      required: true,
+    },
   },
   watch: {},
-  data() {
-    return {
-      columns: [
+  computed: {
+    columns() {
+      var out = [
         {
           field: "name",
         },
@@ -85,37 +89,30 @@ export default {
           label: "Default Value",
           width: "200",
           headerClass: "is-default-column",
-          cellClass: "is-default-column"
+          cellClass: "is-default-column",
         },
-        {
-          field: "web",
-          label: "WEB",
-          width: "100",
-        },
-        {
-          field: "oltp",
-          label: "OLTP",
-          width: "100",
-        },
-        {
-          field: "dw",
-          label: "DW",
-          width: "100",
-        },
-        {
-          field: "mixed",
-          label: "Mixed",
-          width: "100",
-        },
-        {
-          field: "desktop",
-          label: "Desktop",
-          width: "100",
-        },
-      ],
-    };
-  },
-  computed: {
+      ];
+
+      const allEnvs = ["web", "oltp", "dw", "mixed", "desktop"];
+
+      for (let i = 0; i < allEnvs.length; i++) {
+        var newCol = {
+          field: allEnvs[i],
+          label: allEnvs[i].toUpperCase(),
+          width: 100,
+        };
+
+        if (allEnvs[i].toUpperCase() === this.currentEnv.toUpperCase()) {
+          Object.assign(newCol, {
+            headerClass: "is-selected-column",
+            cellClass: "is-selected-column",
+          });
+        }
+        out.push(newCol);
+      }
+
+      return out;
+    },
     formattedConfigs() {
       if (!this.fullResponse) return [];
       return formatConfigs(this.fullResponse);
@@ -135,6 +132,6 @@ export default {
   color: white !important;
 }
 .is-default-column {
-    background: #f8f8f8 !important;
+  background: #f8f8f8 !important;
 }
 </style>
