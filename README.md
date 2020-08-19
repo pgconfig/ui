@@ -1,4 +1,5 @@
 # pgconfig.org UI
+[![Netlify Status](https://api.netlify.com/api/v1/badges/52729dd5-3d3b-4314-867f-6f71b94c9002/deploy-status)](https://app.netlify.com/sites/pgconfig-ui-v2/deploys)
 
 This is the new UI version, wrote from scratch using vuejs.
 
