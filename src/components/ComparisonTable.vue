@@ -83,32 +83,34 @@ export default {
         {
           field: "documentation.default_value",
           label: "Default Value",
-          width: "500",
+          width: "200",
+          headerClass: "is-default-column",
+          cellClass: "is-default-column"
         },
         {
           field: "web",
           label: "WEB",
-          width: "500",
+          width: "100",
         },
         {
           field: "oltp",
           label: "OLTP",
-          width: "500",
+          width: "100",
         },
         {
           field: "dw",
           label: "DW",
-          width: "500",
+          width: "100",
         },
         {
           field: "mixed",
           label: "Mixed",
-          width: "500",
+          width: "100",
         },
         {
           field: "desktop",
           label: "Desktop",
-          width: "500",
+          width: "100",
         },
       ],
     };
@@ -126,3 +128,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.is-selected-column {
+  background: #7957d5 !important;
+  color: white !important;
+}
+.is-default-column {
+    background: #f8f8f8 !important;
+}
+</style>
