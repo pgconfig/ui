@@ -77,6 +77,7 @@
                 <option value="9.4">9.4 (EOL)</option>
                 <option value="9.3">9.3 (EOL)</option>
                 <option value="9.2">9.2 (EOL)</option>
+                <option value="9.1">9.1 (EOL)</option>
               </b-select>
             </b-field>
           </div>
