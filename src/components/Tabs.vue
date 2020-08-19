@@ -1,11 +1,11 @@
 <template>
   <div class="columns">
     <div class="column">
-      <b-tabs position="is-right" class="block">
+      <b-tabs position="is-centered" size="is-medium" class="block">
         <b-tab-item label="Profile Comparison" icon="select-compare">
           <comparison-table :fullResponse="fullResponse" :pgVersion="pgVersion" :currentEnv="currentEnv"></comparison-table>
         </b-tab-item>
-        <b-tab-item label="Export" icon="code-tags">
+        <b-tab-item label="Export Config" icon="code-tags">
           <export-config  v-on:changingForm="formChange" :exportedResponse="exportedResponse" ></export-config>
         </b-tab-item>
       </b-tabs>

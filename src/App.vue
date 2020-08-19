@@ -13,14 +13,22 @@
     <section class="section">
       <div class="container">
         <h1 class="title">Tuning Advisor</h1>
-        <config-form v-on:changingForm="formChange"></config-form>
-        <tabs
-          v-on:changingForm="formExportChange"
-          :fullResponse="fullResponse"
-          :exportedResponse="exportedResponse"
-          :pgVersion="pgVersion"
-          :currentEnv="currentEnv"
-        ></tabs>
+        <div class="columns">
+          <div class="column">
+            <config-form v-on:changingForm="formChange"></config-form>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column">
+            <tabs
+              v-on:changingForm="formExportChange"
+              :fullResponse="fullResponse"
+              :exportedResponse="exportedResponse"
+              :pgVersion="pgVersion"
+              :currentEnv="currentEnv"
+            ></tabs>
+          </div>
+        </div>
       </div>
     </section>
     <footer class="footer">
