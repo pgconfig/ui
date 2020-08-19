@@ -80,6 +80,11 @@ export default {
   watch: {},
   computed: {
     columns() {
+      this.$buefy.snackbar.open({
+        message: `Comparing the <b>${this.currentEnv.toUpperCase()}</b> profile against all profiles.`,
+        actionText: null,
+        type: 'is-info',
+      });
       var out = [
         {
           field: "name",
