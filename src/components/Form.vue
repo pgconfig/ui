@@ -2,7 +2,10 @@
   <div>
     <div class="columns box">
       <div class="column is-three-quarters">
-        <p class="bd-notification">Server</p>
+        <h2 class="bd-notification form-header">
+          <span class="icon is-medium"><i class="mdi mdi-server mdi-12px"></i></span>
+          Server
+        </h2>
         <div class="columns is-desktop">
           <div class="column">
             <b-field label="Operating system" label-position="inside">
@@ -50,7 +53,10 @@
         </div>
       </div>
       <div class="column">
-        <p class="bd-notification">Database</p>
+        <h2 class="bd-notification form-header">
+          <span class="icon is-medium"><i class="mdi mdi-database mdi-12px"></i></span>
+          Database
+        </h2>
         <div class="columns is-mobile">
           <div class="column">
             <b-field label="Application profile" label-position="inside">
@@ -118,4 +124,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.form-header {
+  border-bottom: 1px solid #dbdbdb;
+  margin-bottom: .5em;
+  font-size: 1.2em;
+  /* color: #7957d5; */
+  font-weight: bold;
+}
 </style>
