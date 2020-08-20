@@ -3,7 +3,9 @@
     <div class="columns box">
       <div class="column is-three-quarters">
         <h2 class="bd-notification form-header">
-          <span class="icon is-medium"><i class="mdi mdi-server mdi-12px"></i></span>
+          <span class="icon is-medium">
+            <i class="mdi mdi-server mdi-12px"></i>
+          </span>
           Server
         </h2>
         <div class="columns is-desktop">
@@ -54,7 +56,9 @@
       </div>
       <div class="column">
         <h2 class="bd-notification form-header">
-          <span class="icon is-medium"><i class="mdi mdi-database mdi-12px"></i></span>
+          <span class="icon is-medium">
+            <i class="mdi mdi-database mdi-12px"></i>
+          </span>
           Database
         </h2>
         <div class="columns is-mobile">
@@ -94,14 +98,74 @@
 </template>
 
 <script>
+import { isEqual } from "lodash";
+
 export default {
   name: "Form",
   props: {},
   watch: {
+    $route(to) {
+      if (to.query) {
+        if (to.query.max_connections) {
+          this.form.max_connections = parseInt(to.query.max_connections);
+        }
+
+        if (to.query.pg_version) {
+          this.form.pg_version = parseFloat(to.query.pg_version);
+        }
+
+        if (to.query.environment_name) {
+          this.form.environment_name = to.query.environment_name;
+        }
+
+        if (to.query.total_ram) {
+          this.form.total_ram = parseInt(to.query.total_ram);
+        }
+
+        if (to.query.cpus) {
+          this.form.cpus = parseInt(to.query.cpus);
+        }
+
+        if (to.query.drive_type) {
+          this.form.drive_type = to.query.drive_type;
+        }
+
+        if (to.query.arch) {
+          this.form.arch = to.query.arch;
+        }
+
+        if (to.query.os_type) {
+          this.form.os_type = to.query.os_type;
+        }
+      }
+    },
     form: {
       immediate: true,
       handler(newForm) {
-        this.$emit('changingForm', newForm);
+        this.$emit("changingForm", newForm);
+
+        if (isEqual(newForm, this.$route.query)) {
+          console.log("igual");
+        } else {
+          console.log("diff");
+        }
+
+        console.log(newForm, " aaa ", this.$route.query);
+
+        if (!isEqual(newForm, this.$route.query)) {
+          this.$router
+            .push({
+              // path: '/',
+              query: this.form,
+            })
+            .catch((failure) => {
+              console.log(failure);
+              // if (isNavigationFailure(failure, NavigationFailureType.redirected)) {
+              //   // show a small notification to the user
+              //   showToast("Login in order to access the admin panel");
+              // }
+            });
+        }
       },
     },
   },
@@ -125,7 +189,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .form-header {
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   font-size: 1.2em;
   /* color: #7957d5; */
   font-weight: bold;

@@ -82,15 +82,15 @@ export default {
   },
   computed: {
     pgVersion() {
-      if(!this.form) return '';
+      if (!this.form) return "";
       return this.form.pg_version.toString();
     },
     currentEnv() {
-      if(!this.form) return '';
+      if (!this.form) return "";
       return this.form.environment_name;
     },
     urlArgs() {
-      if (!this.form) return '';
+      if (!this.form) return "";
 
       const args = Object.entries(this.form).map(function ([k, v]) {
         if (k === "total_ram") {
@@ -118,8 +118,22 @@ export default {
     tableIsLoading(val) {
       this.isLoading = val;
     },
-    async formChange(form) {
-      this.form = form;
+    formChange(form) {
+      // debugger;
+      this.form=form;
+
+      // this.$router
+      //   .push({
+      //     // path: '/',
+      //     query: form,
+      //   })
+      //   .catch((failure) => {
+      //     console.log(failure);
+      //     // if (isNavigationFailure(failure, NavigationFailureType.redirected)) {
+      //     //   // show a small notification to the user
+      //     //   showToast("Login in order to access the admin panel");
+      //     // }
+      //   });
     },
     async formExportChange(exportForm) {
       if (!exportForm) {
@@ -161,7 +175,6 @@ export default {
         if (typeof response.data === "string") {
           output = response.data;
         }
-        
       } catch (e) {
         this.$buefy.dialog.alert({
           title: "Error",
