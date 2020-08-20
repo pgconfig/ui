@@ -102,7 +102,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .hljs {
   padding: 0em;
   background: none;
