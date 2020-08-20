@@ -104,4 +104,8 @@ export default {
 </script>
 
 <style>
+.hljs {
+  padding: 0em !important;
+  background: none !important;
+}
 </style>
