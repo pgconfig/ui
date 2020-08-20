@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="columns is-desktop">
+    <div class="columns is-desktop is-vcentered">
       <div class="column">
         <b-field label="Export Format" label-position="inside">
           <b-select v-model="exportForm.format" expanded>
@@ -22,23 +22,21 @@
       <div class="column">
         <b-switch v-model="exportForm.include_pgbadger">Include PGBadger log configuration</b-switch>
       </div>
+      <div class="column is-2">
+
+        <b-button
+          type="is-primary is-light"
+          v-clipboard:copy="exportedResponse.output"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+           rounded  expanded      >
+          <b-icon icon="content-copy" size="is-small" ></b-icon>&nbsp;Copy to clipboard
+        </b-button>
+      </div>
     </div>
     <div class="columns is-desktop">
       <div class="column">
         <pre v-highlightjs="exportedResponse.output"><code :class="highlightLang"></code></pre>
-      </div>
-    </div>
-
-    <div class="columns is-desktop">
-      <div class="column">
-        <b-button
-          type="button"
-          v-clipboard:copy="exportedResponse.output"
-          v-clipboard:success="onCopy"
-          v-clipboard:error="onError"
-        >
-          <b-icon icon="content-copy" size="is-small"></b-icon>Copy to clipboard
-        </b-button>
       </div>
     </div>
   </div>
