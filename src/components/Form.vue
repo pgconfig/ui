@@ -11,7 +11,11 @@
         <div class="columns is-desktop">
           <div class="column">
             <b-field label="Operating system" label-position="inside">
-              <b-select placeholder="Select one" v-model="form.os_type" expanded>
+              <b-select
+                placeholder="Select one"
+                v-model="form.os_type"
+                expanded
+              >
                 <option value="linux">GNU/Linux Based</option>
                 <option value="windows">Windows Based</option>
                 <option value="unix">Unix Based</option>
@@ -28,7 +32,11 @@
           </div>
           <div class="column">
             <b-field label="Storage type" label-position="inside">
-              <b-select placeholder="Select one" v-model="form.drive_type" expanded>
+              <b-select
+                placeholder="Select one"
+                v-model="form.drive_type"
+                expanded
+              >
                 <option value="HDD">HDD Storage</option>
                 <option value="SSD">SSD Storage</option>
                 <option value="SAN">Network Storage - NAS/SAN</option>
@@ -39,17 +47,29 @@
         <div class="columns is-desktop">
           <div class="column">
             <b-field label="Number of CPUs" label-position="inside">
-              <b-numberinput min="1" controls-position="compact" v-model="form.cpus"></b-numberinput>
+              <b-numberinput
+                min="1"
+                controls-position="compact"
+                v-model="form.cpus"
+              ></b-numberinput>
             </b-field>
           </div>
           <div class="column">
             <b-field label="Total Memory (GB)" label-position="inside">
-              <b-numberinput min="1" controls-position="compact" v-model="form.total_ram"></b-numberinput>
+              <b-numberinput
+                min="1"
+                controls-position="compact"
+                v-model="form.total_ram"
+              ></b-numberinput>
             </b-field>
           </div>
           <div class="column">
             <b-field label="Max connections" label-position="inside">
-              <b-numberinput min="1" controls-position="compact" v-model="form.max_connections"></b-numberinput>
+              <b-numberinput
+                min="1"
+                controls-position="compact"
+                v-model="form.max_connections"
+              ></b-numberinput>
             </b-field>
           </div>
         </div>
@@ -64,9 +84,15 @@
         <div class="columns is-mobile">
           <div class="column">
             <b-field label="Application profile" label-position="inside">
-              <b-select placeholder="Select one" v-model="form.environment_name" expanded>
+              <b-select
+                placeholder="Select one"
+                v-model="form.environment_name"
+                expanded
+              >
                 <option value="WEB">General web applications</option>
-                <option value="OLTP">ERP or long transaction applications</option>
+                <option value="OLTP"
+                  >ERP or long transaction applications</option
+                >
                 <option value="DW">DataWare house and BI Applications</option>
                 <option value="Mixed">DB and APP on the same server</option>
                 <option value="Desktop">Developer local machine</option>
@@ -77,7 +103,11 @@
         <div class="columns is-mobile">
           <div class="column">
             <b-field label="PostgreSQL Version" label-position="inside">
-              <b-select placeholder="Select a version" v-model="form.pg_version" expanded>
+              <b-select
+                placeholder="Select a version"
+                v-model="form.pg_version"
+                expanded
+              >
                 <!-- <option value="13">13 (beta)</option> -->
                 <option value="12">12 (Latest)</option>
                 <option value="11">11</option>
@@ -98,77 +128,10 @@
 </template>
 
 <script>
-import { isEqual } from "lodash";
+import lodash from "lodash";
 
 export default {
   name: "Form",
-  props: {},
-  watch: {
-    $route(to) {
-      if (to.query) {
-        if (to.query.max_connections) {
-          this.form.max_connections = parseInt(to.query.max_connections);
-        }
-
-        if (to.query.pg_version) {
-          this.form.pg_version = parseFloat(to.query.pg_version);
-        }
-
-        if (to.query.environment_name) {
-          this.form.environment_name = to.query.environment_name;
-        }
-
-        if (to.query.total_ram) {
-          this.form.total_ram = parseInt(to.query.total_ram);
-        }
-
-        if (to.query.cpus) {
-          this.form.cpus = parseInt(to.query.cpus);
-        }
-
-        if (to.query.drive_type) {
-          this.form.drive_type = to.query.drive_type;
-        }
-
-        if (to.query.arch) {
-          this.form.arch = to.query.arch;
-        }
-
-        if (to.query.os_type) {
-          this.form.os_type = to.query.os_type;
-        }
-      }
-    },
-    form: {
-      immediate: true,
-      handler(newForm) {
-        this.$emit("changingForm", newForm);
-
-        if (isEqual(newForm, this.$route.query)) {
-          console.log("igual");
-        } else {
-          console.log("diff");
-        }
-
-        console.log(newForm, " aaa ", this.$route.query);
-
-        if (!isEqual(newForm, this.$route.query)) {
-          this.$router
-            .push({
-              // path: '/',
-              query: this.form,
-            })
-            .catch((failure) => {
-              console.log(failure);
-              // if (isNavigationFailure(failure, NavigationFailureType.redirected)) {
-              //   // show a small notification to the user
-              //   showToast("Login in order to access the admin panel");
-              // }
-            });
-        }
-      },
-    },
-  },
   data() {
     return {
       form: {
@@ -179,14 +142,69 @@ export default {
         cpus: 2,
         drive_type: "SSD",
         arch: "x86-64",
-        os_type: "linux",
-      },
+        os_type: "linux"
+      }
     };
   },
+  computed: {
+    valuesFromURL() {
+      return this.parseQuery(this.$route.query);
+    }
+  },
+  watch: {
+    $route() {
+      if (this.valuesFromURL) {
+        this.form.max_connections = this.valuesFromURL.max_connections;
+        this.form.pg_version = this.valuesFromURL.pg_version;
+        this.form.environment_name = this.valuesFromURL.environment_name;
+        this.form.total_ram = this.valuesFromURL.total_ram;
+        this.form.cpus = this.valuesFromURL.cpus;
+        this.form.drive_type = this.valuesFromURL.drive_type;
+        this.form.arch = this.valuesFromURL.arch;
+        this.form.os_type = this.valuesFromURL.os_type;
+      }
+    },
+    form: {
+      deep: true,
+      immediate: true,
+      handler(newForm) {
+        const formWithoutGetters = { ...this.form };
+
+        if (!lodash.isEqual(formWithoutGetters, this.valuesFromURL)) {
+          this.$router
+            .push({
+              query: formWithoutGetters
+            })
+            .catch(failure => {
+              console.log(failure);
+            });
+        }
+        this.$emit("changingForm", newForm);
+      }
+    }
+  },
+  methods: {
+    parserBy(key) {
+      const parsers = {
+        max_connections: parseInt,
+        pg_version: parseFloat,
+        total_ram: parseInt,
+        cpus: parseInt
+      };
+      const defaultParser = value => value;
+      return parsers[key] || defaultParser;
+    },
+    parseQuery(query) {
+      const parsedValues = Object.entries(query).reduce(
+        (acc, [key, value]) => ({ ...acc, [key]: this.parserBy(key)(value) }),
+        {}
+      );
+      return parsedValues;
+    }
+  }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .form-header {
   margin-bottom: 0.5em;
