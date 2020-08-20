@@ -23,14 +23,15 @@
         <b-switch v-model="exportForm.include_pgbadger">Include PGBadger log configuration</b-switch>
       </div>
       <div class="column is-2">
-
         <b-button
           type="is-primary is-light"
           v-clipboard:copy="exportedResponse.output"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
-           rounded  expanded      >
-          <b-icon icon="content-copy" size="is-small" ></b-icon>&nbsp;Copy to clipboard
+          rounded
+          expanded
+        >
+          <b-icon icon="content-copy" size="is-small"></b-icon>&nbsp;Copy to clipboard
         </b-button>
       </div>
     </div>
@@ -103,7 +104,7 @@ export default {
 
 <style>
 .hljs {
-  padding: 0em !important;
-  background: none !important;
+  padding: 0em;
+  background: none;
 }
 </style>
