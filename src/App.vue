@@ -14,7 +14,15 @@
             <div id="navbarMenuHeroB" class="navbar-menu">
               <div class="navbar-end">
                 <a class="navbar-item is-active">Home</a>
-                <a class="navbar-item" href="https://docs.pgconfig.org" target="_blank">Documentation</a>
+                <a
+                  class="navbar-item"
+                  href="https://docs.pgconfig.org"
+                  target="_blank"
+                >Documentation</a>
+                <a class="navbar-item" href="https://github.com/pgconfig" target="_blank">
+                  <b-icon icon="github" size="is-small"></b-icon>&nbsp;
+                  <span>GitHub</span>
+                </a>
               </div>
             </div>
           </div>
@@ -24,7 +32,8 @@
       <div class="hero-body">
         <div class="container">
           <p class="title">
-            <b-icon icon="database-marker" size="is-small"></b-icon>&nbsp;PGConfig
+            <b-icon icon="database-marker" size="is-small"></b-icon>&nbsp;
+            <span>PGConfig</span>
           </p>
           <p class="subtitle">PostgreSQL configuration builder</p>
         </div>
@@ -140,7 +149,7 @@ export default {
     },
     formChange(form) {
       // debugger;
-      this.form=form;
+      this.form = form;
 
       // this.$router
       //   .push({
