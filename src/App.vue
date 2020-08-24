@@ -1,12 +1,32 @@
 <template>
   <div id="app">
     <section class="hero is-dark is-bold">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <span class="navbar-burger burger" data-target="navbarMenuHeroB">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroB" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item is-active">Home</a>
+                <a class="navbar-item" href="https://docs.pgconfig.org" target="_blank">Documentation</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">
+          <p class="title">
             <b-icon icon="database-marker" size="is-small"></b-icon>&nbsp;PGConfig
-          </h1>
-          <h2 class="subtitle">PostgreSQL configuration builder</h2>
+          </p>
+          <p class="subtitle">PostgreSQL configuration builder</p>
         </div>
       </div>
     </section>
