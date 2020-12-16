@@ -10,7 +10,7 @@
                 <i>{{ props.row.documentation.abstract }}</i>
               </blockquote>
               <div v-if="props.row.documentation.recomendations">
-                <p>Suggested readgings:</p>
+                <p>Suggested readings:</p>
                 <ul>
                   <li v-for="(url,desc) in props.row.documentation.recomendations" :key="desc">
                     <a :href="url" target="_blank">{{ desc }}</a>
