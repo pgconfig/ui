@@ -29,19 +29,29 @@
         </nav>
       </div>
 
-      <div class="hero-body">
-        <div class="container">
-          <p class="title">
-            <b-icon icon="database-marker" size="is-small"></b-icon>&nbsp;
-            <span>PGConfig</span>
-          </p>
-          <p class="subtitle">PostgreSQL configuration builder</p>
+
+      <div class="hero-body is-align-items-stretch">
+        <div class="container is-flex">
+          <div class="columns is-centered is-flex-grow-1">
+            <div class="column is-2">
+              <b-image
+                src="/pgconfig.svg"
+                alt="The Buefy Logo"
+                responsive="true"
+              ></b-image>
+            </div>
+            <div class="column is-align-self-center">
+              <p class="title">
+                <span>PGConfig</span>
+              </p>
+              <p class="subtitle">PostgreSQL configuration builder</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
     <section class="section">
       <div class="container">
-        <h1 class="title">Tuning Advisor</h1>
         <div class="columns">
           <div class="column">
             <config-form v-on:changingForm="formChange"></config-form>
