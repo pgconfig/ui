@@ -4,9 +4,14 @@ services:
     build: .
     ports:
       - 8080:8080
+    working_dir: /app
+    stdin_open: true
+    tty: true
     command: yarn serve
-    working_dir: /build
     volumes:
-      - type: bind
-        source: ./
-        target: /build
+      - .:/app
+      - node_modules:/app/node_modules
+
+
+volumes:
+  node_modules:
