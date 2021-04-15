@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  webapp:
+    build: .
+    ports:
+      - 8080:8080
+    command: yarn serve
+    working_dir: /build
+    volumes:
+      - type: bind
+        source: ./
+        target: /build
