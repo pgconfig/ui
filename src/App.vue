@@ -18,10 +18,13 @@
                   class="navbar-item"
                   href="https://docs.pgconfig.org"
                   target="_blank"
-                >Documentation</a>
-                <a class="navbar-item" href="https://github.com/pgconfig" target="_blank">
-                  <b-icon icon="github" size="is-small"></b-icon>&nbsp;
-                  <span>GitHub</span>
+                  >Documentation</a
+                >
+                <a class="navbar-item" href="" target="_blank">
+                  <span class="icon is-medium">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  GitHub
                 </a>
               </div>
             </div>
@@ -29,14 +32,13 @@
         </nav>
       </div>
 
-
       <div class="hero-body is-align-items-stretch">
         <div class="container is-flex">
           <div class="columns is-centered is-flex-grow-1">
             <div class="column is-2">
               <b-image
                 src="/pgconfig.svg"
-                alt="The Buefy Logo"
+                alt="The PGConfig Logo"
                 responsive="true"
               ></b-image>
             </div>
@@ -78,7 +80,11 @@
         </p>
       </div>
     </footer>
-    <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
+    <b-loading
+      :is-full-page="true"
+      :active.sync="isLoading"
+      :can-cancel="false"
+    ></b-loading>
   </div>
 </template>
 

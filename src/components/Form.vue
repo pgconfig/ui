@@ -4,7 +4,7 @@
       <div class="column is-three-quarters">
         <h2 class="bd-notification form-header">
           <span class="icon is-medium">
-            <i class="mdi mdi-server mdi-12px"></i>
+            <i class="fas fa-server"></i>
           </span>
           Server
         </h2>
@@ -77,7 +77,7 @@
       <div class="column">
         <h2 class="bd-notification form-header">
           <span class="icon is-medium">
-            <i class="mdi mdi-database mdi-12px"></i>
+            <i class="fas fa-database"></i>
           </span>
           Database
         </h2>
@@ -90,9 +90,9 @@
                 expanded
               >
                 <option value="WEB">General web applications</option>
-                <option value="OLTP"
-                  >ERP or long transaction applications</option
-                >
+                <option value="OLTP">
+                  ERP or long transaction applications
+                </option>
                 <option value="DW">DataWare house and BI Applications</option>
                 <option value="Mixed">DB and APP on the same server</option>
                 <option value="Desktop">Developer local machine</option>
@@ -142,14 +142,14 @@ export default {
         cpus: 2,
         drive_type: "SSD",
         arch: "x86-64",
-        os_type: "linux"
-      }
+        os_type: "linux",
+      },
     };
   },
   computed: {
     valuesFromURL() {
       return this.parseQuery(this.$route.query);
-    }
+    },
   },
   watch: {
     $route() {
@@ -173,15 +173,15 @@ export default {
         if (!lodash.isEqual(formWithoutGetters, this.valuesFromURL)) {
           this.$router
             .push({
-              query: formWithoutGetters
+              query: formWithoutGetters,
             })
-            .catch(failure => {
+            .catch((failure) => {
               console.log(failure);
             });
         }
         this.$emit("changingForm", newForm);
-      }
-    }
+      },
+    },
   },
   methods: {
     parserBy(key) {
@@ -189,9 +189,9 @@ export default {
         max_connections: parseInt,
         pg_version: parseFloat,
         total_ram: parseInt,
-        cpus: parseInt
+        cpus: parseInt,
       };
-      const defaultParser = value => value;
+      const defaultParser = (value) => value;
       return parsers[key] || defaultParser;
     },
     parseQuery(query) {
@@ -200,8 +200,8 @@ export default {
         {}
       );
       return parsedValues;
-    }
-  }
+    },
+  },
 };
 </script>
 

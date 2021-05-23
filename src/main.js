@@ -7,17 +7,17 @@ import VueHighlightJS from 'vue-highlightjs';
 import VueClipboard from 'vue-clipboard2';
 import VueRouter from 'vue-router';
 
-
 Vue.use(VueRouter);
-Vue.use(Buefy);
+Vue.use(Buefy, {
+  defaultIconPack: 'fas'
+});
+
 Vue.use(VueHighlightJS);
 Vue.use(VueClipboard);
 
 VueClipboard.config.autoSetContainer = true;
 Vue.config.productionTip = false;
 Vue.prototype.$http = http;
-
-
 
 const router = new VueRouter({
   routes: [
