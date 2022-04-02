@@ -26,7 +26,7 @@
             <b-field label="Architecture" label-position="inside">
               <b-select placeholder="Select one" v-model="form.arch" expanded>
                 <option value="x86-64">64 Bits (x86-64)</option>
-                <option value="i686">32 Bits (i686)</option>
+                <option value="386">32 Bits (386)</option>
               </b-select>
             </b-field>
           </div>

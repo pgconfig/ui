@@ -6,13 +6,18 @@
           <b-select v-model="exportForm.format" expanded>
             <option value="alter_system">ALTER SYSTEM commands</option>
             <option value="conf">UNIX-like config file</option>
+            <option value="stackgres">StackGres-like YAML file</option>
             <!-- <option value="json">JSON output</option> -->
           </b-select>
         </b-field>
       </div>
       <div class="column">
         <b-field label="Log Format" label-position="inside">
-          <b-select v-model="exportForm.log_format" :disabled="showLogFormat" expanded>
+          <b-select
+            v-model="exportForm.log_format"
+            :disabled="showLogFormat"
+            expanded
+          >
             <option value="stderr">Standard Error output</option>
             <option value="csvlog">Comma-separated values</option>
             <option value="syslog">Syslog daemon</option>
@@ -20,7 +25,9 @@
         </b-field>
       </div>
       <div class="column">
-        <b-switch v-model="exportForm.include_pgbadger">Include PGBadger log configuration</b-switch>
+        <b-switch v-model="exportForm.include_pgbadger"
+          >Include PGBadger log configuration</b-switch
+        >
       </div>
       <div class="column is-2">
         <b-button
@@ -31,13 +38,16 @@
           rounded
           expanded
         >
-          <b-icon icon="content-copy" size="is-small"></b-icon>&nbsp;Copy to clipboard
+          <b-icon icon="content-copy" size="is-small"></b-icon>&nbsp;Copy to
+          clipboard
         </b-button>
       </div>
     </div>
     <div class="columns is-desktop">
       <div class="column">
-        <pre v-highlightjs="exportedResponse.output"><code :class="highlightLang"></code></pre>
+        <pre
+          v-highlightjs="exportedResponse.output"
+        ><code :class="highlightLang"></code></pre>
       </div>
     </div>
   </div>
