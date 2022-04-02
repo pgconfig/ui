@@ -108,7 +108,8 @@
                 v-model="form.pg_version"
                 expanded
               >
-                <option value="13">13 (Latest)</option>
+                <option value="14">14 (Latest)</option>
+                <option value="13">13</option>
                 <option value="12">12</option>
                 <option value="11">11</option>
                 <option value="10">10</option>
@@ -136,7 +137,7 @@ export default {
     return {
       form: {
         max_connections: 100,
-        pg_version: 13,
+        pg_version: 14,
         environment_name: "WEB",
         total_ram: 4,
         cpus: 2,
