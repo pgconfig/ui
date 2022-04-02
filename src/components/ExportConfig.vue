@@ -98,15 +98,16 @@ export default {
       return !this.exportForm.include_pgbadger;
     },
     highlightLang() {
-      if (this.exportForm.format === "alter_system") {
-        return "sql";
+      switch (this.exportForm.format) {
+        case "alter_system":
+          return "sql";
+        case "stackgres":
+          return "yaml";
+        case "json":
+          return "json";
+        default:
+          return "bash";
       }
-
-      if (this.exportForm.format === "json") {
-        return "json";
-      }
-
-      return "config";
     },
   },
 };
