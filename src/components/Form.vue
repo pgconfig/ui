@@ -113,8 +113,8 @@
                 <option value="12">12</option>
                 <option value="11">11</option>
                 <option value="10">10</option>
-                <option value="9.6">9.6</option>
-                <option value="9.5">9.5</option>
+                <option value="9.6">9.6 (EOL)</option>
+                <option value="9.5">9.5 (EOL)</option>
                 <option value="9.4">9.4 (EOL)</option>
                 <option value="9.3">9.3 (EOL)</option>
                 <option value="9.2">9.2 (EOL)</option>
