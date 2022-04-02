@@ -20,7 +20,11 @@
                   target="_blank"
                   >Documentation</a
                 >
-                <a class="navbar-item" href="" target="_blank">
+                <a
+                  class="navbar-item"
+                  href="https://github.com/pgconfig/api"
+                  target="_blank"
+                >
                   <span class="icon is-medium">
                     <i class="fab fa-github"></i>
                   </span>
