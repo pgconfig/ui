@@ -43,8 +43,8 @@
         </b-button>
       </div>
     </div>
-    <div class="container is-full-width">
-      <div class="container is-fuild">
+    <div class="columns">
+      <div class="container">
         <pre
           v-highlightjs="exportedResponse.output"
         ><code :class="highlightLang"></code></pre>
