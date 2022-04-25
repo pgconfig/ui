@@ -1,56 +1,53 @@
 <template>
   <div id="app">
-    <section class="hero is-dark is-bold">
-      <div class="hero-head">
-        <nav class="navbar">
-          <div class="container">
-            <div class="navbar-brand">
-              <span class="navbar-burger burger" data-target="navbarMenuHeroB">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-            <div id="navbarMenuHeroB" class="navbar-menu">
-              <div class="navbar-end">
-                <a class="navbar-item is-active">Home</a>
-                <a
-                  class="navbar-item"
-                  href="https://docs.pgconfig.org"
-                  target="_blank"
-                  >Documentation</a
-                >
-                <a
-                  class="navbar-item"
-                  href="https://github.com/pgconfig/api"
-                  target="_blank"
-                >
-                  <span class="icon is-medium">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </div>
-
+    <section class="hero is-small is-dark is-bold">
       <div class="hero-body is-align-items-stretch">
-        <div class="container is-flex">
-          <div class="columns is-centered is-flex-grow-1">
-            <div class="column is-2">
-              <b-image
-                src="/pgconfig.svg"
-                alt="The PGConfig Logo"
-                responsive="true"
-              ></b-image>
+        <div class="container">
+          <div class="columns">
+            <div class="column">
+              <div class="logo">
+                <img
+                  src="/pgconfig.svg"
+                  style="
+                    max-width: 120px;
+                    max-height: 120px;
+                    float: left;
+                    padding-right: 10px;
+                  "
+                  alt="dashboard logo"
+                />
+              </div>
+              <p class="title" style="padding-top: 15px">PostgreSQL</p>
+              <p class="subtitle">Configuration Builder</p>
             </div>
-            <div class="column is-align-self-center">
-              <p class="title">
-                <span>PGConfig</span>
-              </p>
-              <p class="subtitle">PostgreSQL configuration builder</p>
+            <div class="column">
+              <nav
+                role="navigation"
+                aria-label="main navigation"
+                class="navbar"
+              >
+                <div class="container">
+                  <div class="navbar-menu is-active">
+                    <div class="navbar-end">
+                      <a class="navbar-item is-active">Home</a>
+                      <a
+                        rel="noreferrer"
+                        href="https://github.com/pgconfig/api"
+                        target="_blank"
+                        class="navbar-item"
+                        ><i class="fa-fw fab fa-github mr-2"></i> Contribute
+                      </a>
+                      <a
+                        rel="noreferrer"
+                        href="https://docs.pgconfig.org"
+                        target="_blank"
+                        class="navbar-item"
+                        ><i class="fa-fw fas fa-book mr-2"></i> Documentation
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
           </div>
         </div>
