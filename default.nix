@@ -4,8 +4,7 @@ pkgs.mkShell {
   name="viz-environment";    
   
   buildInputs = [
-    pkgs.nodejs-18_x
-    pkgs.yarn
+    pkgs.bun
   ];
 
   shellHook = 
