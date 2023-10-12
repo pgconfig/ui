@@ -4,8 +4,8 @@
       <h3 class="subtitle">{{ item.name }}</h3>
       <b-table :data="item.params" detailed detail-key="name" :columns="columns" :hoverable="true">
         <template slot="detail" slot-scope="props">
-          <div class="columns is-mobile">
-            <div class="column content">
+          <div class="rows is-mobile">
+            <div class="row content">
               <blockquote class="subtitle">
                 <i>{{ props.row.documentation.abstract }}</i>
               </blockquote>
@@ -18,7 +18,7 @@
                 </ul>
               </div>
             </div>
-            <div class="column">
+            <div class="row">
               <div class="box">
                 <article class="media">
                   <div class="media-content">
