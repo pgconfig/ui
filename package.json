@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.6.0",
     "buefy": "^0.9.6",
     "core-js": "^3.6.5",
     "lodash": "^4.17.20",
