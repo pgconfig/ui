@@ -15,7 +15,6 @@
   scripts.dev.exec = "yarn serve";
 
   enterShell = ''
-    export NODE_OPTIONS=--openssl-legacy-provider
     echo "Run 'devenv install' to install dependencies."
     echo "Run 'devenv dev' to start the development server."
   '';
