@@ -109,14 +109,14 @@
                 expanded
               >
                 <option value="18">18 (Latest)</option>
-                <option value="17">16</option>
+                <option value="17">17</option>
                 <option value="16">16</option>
                 <option value="15">15</option>
                 <option value="14">14</option>
-                <option value="13">13</option>
-                <option value="12">12</option>
-                <option value="11">11</option>
-                <option value="10">10</option>
+                <option value="13">13 (EOL)</option>
+                <option value="12">12 (EOL)</option>
+                <option value="11">11 (EOL)</option>
+                <option value="10">10 (EOL)</option>
                 <option value="9.6">9.6 (EOL)</option>
                 <option value="9.5">9.5 (EOL)</option>
                 <option value="9.4">9.4 (EOL)</option>
