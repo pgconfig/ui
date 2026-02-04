@@ -6,9 +6,7 @@
         <template slot="detail" slot-scope="props">
           <div class="columns is-mobile">
             <div class="column content">
-              <blockquote class="subtitle">
-                <i>{{ props.row.documentation.abstract }}</i>
-              </blockquote>
+              <p class="abstract-text">{{ props.row.documentation.abstract }}</p>
               <div v-if="props.row.documentation.recomendations">
                 <p>Suggested readings:</p>
                 <ul>
@@ -138,5 +136,9 @@ export default {
 }
 .is-default-column {
   background: #f8f8f8 !important;
+}
+.abstract-text {
+  white-space: pre-line;
+  margin-bottom: 1rem;
 }
 </style>
