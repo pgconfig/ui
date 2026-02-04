@@ -6,7 +6,7 @@
         <template slot="detail" slot-scope="props">
           <div class="columns is-mobile">
             <div class="column content">
-              <p class="abstract-text">{{ props.row.documentation.abstract }}</p>
+              <div class="abstract-text" v-html="renderMarkdown(props.row.documentation.abstract)"></div>
               <div v-if="props.row.documentation.recomendations">
                 <p>Suggested readings:</p>
                 <ul>
@@ -58,6 +58,7 @@
 
 <script>
 import { formatConfigs } from "../services/formatters";
+import { marked } from "marked";
 
 export default {
   name: "ParamsTable",
@@ -125,6 +126,10 @@ export default {
     confURL(param) {
       return `https://postgresqlco.nf/en/doc/param/${param}/${this.pgVersion}/`;
     },
+    renderMarkdown(text) {
+      if (!text) return '';
+      return marked(text, { breaks: true });
+    },
   },
 };
 </script>
@@ -138,7 +143,7 @@ export default {
   background: #f8f8f8 !important;
 }
 .abstract-text {
-  white-space: pre-line;
+  margin-top: 10px;
   margin-bottom: 1rem;
 }
 </style>
