@@ -30,7 +30,7 @@
                           target="_blank"
                           class="button is-primary"
                         >
-                          <b-icon icon="creation" size="is-small"></b-icon>
+                          <b-icon icon="lightbulb" size="is-small"></b-icon>
                           <span>
                             Learn more on Postgresql<strong>co.nf</strong>
                           </span>
@@ -40,7 +40,7 @@
                           target="_blank"
                           class="button is-light"
                         >
-                          <b-icon icon="file-document" size="is-small"></b-icon>
+                          <b-icon icon="file-alt" size="is-small"></b-icon>
                           <span>Check the docs</span>
                         </a>
                       </div>
