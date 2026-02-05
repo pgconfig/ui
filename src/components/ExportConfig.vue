@@ -38,16 +38,14 @@
           rounded
           expanded
         >
-          <b-icon icon="content-copy" size="is-small"></b-icon>&nbsp;Copy to
-          clipboard
+          <b-icon icon="copy" size="is-small"></b-icon>
+          <span>&nbsp;Copy</span>
         </b-button>
       </div>
     </div>
     <div class="columns">
       <div class="container">
-        <pre
-          v-highlightjs="exportedResponse.output"
-        ><code :class="highlightLang"></code></pre>
+        <pre><code ref="codeBlock" :class="highlightLang"></code></pre>
       </div>
     </div>
   </div>
@@ -55,6 +53,15 @@
 
 <script>
 // https://github.com/Inndy/vue-clipboard2
+import hljs from 'highlight.js/lib/core';
+import yaml from 'highlight.js/lib/languages/yaml';
+import sql from 'highlight.js/lib/languages/sql';
+import ini from 'highlight.js/lib/languages/ini';
+
+hljs.registerLanguage('yaml', yaml);
+hljs.registerLanguage('sql', sql);
+hljs.registerLanguage('ini', ini);
+
 export default {
   name: "ExportConfig",
   props: {
@@ -69,8 +76,22 @@ export default {
       immediate: true,
       handler(newForm) {
         this.$emit("changingForm", newForm);
+        this.$nextTick(() => {
+          this.highlightCode();
+        });
       },
     },
+    exportedResponse: {
+      deep: true,
+      handler() {
+        this.$nextTick(() => {
+          this.highlightCode();
+        });
+      },
+    },
+  },
+  mounted() {
+    this.highlightCode();
   },
   data() {
     return {
@@ -92,6 +113,13 @@ export default {
     onError: function (e) {
       alert(`Failed to copy texts: ${e}`);
     },
+    highlightCode() {
+      if (this.$refs.codeBlock && this.exportedResponse.output) {
+        const output = this.exportedResponse.output;
+        const result = hljs.highlight(output, { language: this.highlightLang });
+        this.$refs.codeBlock.innerHTML = result.value;
+      }
+    },
   },
   computed: {
     showLogFormat() {
@@ -106,7 +134,7 @@ export default {
         case "json":
           return "json";
         default:
-          return "bash";
+          return "ini";
       }
     },
   },
