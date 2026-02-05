@@ -87,13 +87,14 @@ export default {
       var out = [
         {
           field: "name",
+          cellClass: "is-family-code has-text-weight-semibold",
         },
         {
           field: "documentation.default_value",
           label: "Default Value",
           width: "200",
           headerClass: "is-default-column",
-          cellClass: "is-default-column",
+          cellClass: "is-default-column is-family-code",
         },
       ];
 
@@ -109,8 +110,10 @@ export default {
         if (allEnvs[i].toUpperCase() === this.currentEnv.toUpperCase()) {
           Object.assign(newCol, {
             headerClass: "is-selected-column",
-            cellClass: "is-selected-column",
+            cellClass: "is-selected-column is-family-code",
           });
+        } else {
+          newCol.cellClass = "is-family-code";
         }
         out.push(newCol);
       }
