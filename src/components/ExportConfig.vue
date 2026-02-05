@@ -29,22 +29,20 @@
           >Include PGBadger log configuration</b-switch
         >
       </div>
-      <div class="column is-2">
+    </div>
+    <div class="columns">
+      <div class="container code-container">
         <b-button
           type="is-primary is-light"
           v-clipboard:copy="exportedResponse.output"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
-          rounded
-          expanded
+          size="is-small"
+          class="copy-button"
         >
           <b-icon icon="copy" size="is-small"></b-icon>
           <span>&nbsp;Copy</span>
         </b-button>
-      </div>
-    </div>
-    <div class="columns">
-      <div class="container">
         <pre><code ref="codeBlock" :class="highlightLang"></code></pre>
       </div>
     </div>
@@ -145,5 +143,14 @@ export default {
 .hljs {
   padding: 0em;
   background: none;
+}
+.code-container {
+  position: relative;
+}
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
 }
 </style>
