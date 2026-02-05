@@ -59,6 +59,11 @@
 <script>
 import { formatConfigs } from "../services/formatters";
 import { marked } from "marked";
+import { configureMarked } from "../utils/markdownAlerts";
+import "../assets/github-alerts.css";
+
+// Configure marked with GitHub alerts extension
+configureMarked(marked);
 
 export default {
   name: "ParamsTable",

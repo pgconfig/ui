@@ -113,7 +113,7 @@ export default {
     },
     highlightCode() {
       if (this.$refs.codeBlock && this.exportedResponse.output) {
-        const output = this.exportedResponse.output;
+        const output = String(this.exportedResponse.output);
         const result = hljs.highlight(output, { language: this.highlightLang });
         this.$refs.codeBlock.innerHTML = result.value;
       }
