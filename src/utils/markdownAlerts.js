@@ -12,27 +12,27 @@
 const alertTypes = {
   NOTE: {
     bulmaClass: 'is-info',
-    icon: 'ⓘ',
+    icon: 'fa-info-circle',
     title: 'Note'
   },
   TIP: {
     bulmaClass: 'is-success',
-    icon: '💡',
+    icon: 'fa-lightbulb',
     title: 'Tip'
   },
   IMPORTANT: {
     bulmaClass: 'is-link',
-    icon: '📢',
+    icon: 'fa-bullhorn',
     title: 'Important'
   },
   WARNING: {
     bulmaClass: 'is-warning',
-    icon: '⚠️',
+    icon: 'fa-exclamation-triangle',
     title: 'Warning'
   },
   CAUTION: {
     bulmaClass: 'is-danger',
-    icon: '🛑',
+    icon: 'fa-ban',
     title: 'Caution'
   }
 };
@@ -78,7 +78,7 @@ export const githubAlertsExtension = {
 
     return `<article class="message ${alert.bulmaClass} github-alert">
   <div class="message-header">
-    <p>${alert.icon} ${alert.title}</p>
+    <p><i class="fas ${alert.icon}"></i> ${alert.title}</p>
   </div>
   <div class="message-body">
     ${this.parser.parse(token.tokens)}

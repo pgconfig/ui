@@ -5,9 +5,7 @@
 
 /* Override Bulma message styles for GitHub-like appearance */
 .message.github-alert {
-  border-left: 4px solid;
   border-radius: 6px;
-  border: 1px solid #dbdbdb;
   border-left: 4px solid;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
 }
@@ -19,6 +17,10 @@
   font-weight: 600;
   font-size: 14px;
   color: inherit;
+}
+
+.message.github-alert .message-header i {
+  margin-right: 6px;
 }
 
 .message.github-alert .message-body {
