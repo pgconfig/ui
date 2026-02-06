@@ -6,7 +6,7 @@
           <comparison-table :fullResponse="fullResponse" :pgVersion="pgVersion" :currentEnv="currentEnv"></comparison-table>
         </b-tab-item>
         <b-tab-item label="Export Config" icon="code-tags">
-          <export-config  v-on:changingForm="formChange" :exportedResponse="exportedResponse" ></export-config>
+          <export-config  v-on:changingForm="formChange" :exportedResponse="exportedResponse" :pgVersion="pgVersion"></export-config>
         </b-tab-item>
       </b-tabs>
     </div>

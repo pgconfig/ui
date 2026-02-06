@@ -21,6 +21,7 @@
             <option value="stderr">Standard Error output</option>
             <option value="csvlog">Comma-separated values</option>
             <option value="syslog">Syslog daemon</option>
+            <option v-if="supportsJsonLog" value="jsonlog">JSON Log</option>
           </b-select>
         </b-field>
       </div>
@@ -67,11 +68,37 @@ export default {
       type: Object,
       required: true,
     },
+    pgVersion: {
+      type: String,
+      required: true,
+    },
   },
 
   watch: {
+    pgVersion: {
+      immediate: true,
+      handler(newVersion) {
+        // Update log_format when PostgreSQL version changes
+        const version = parseFloat(newVersion);
+        const defaultLogFormat = version >= 15 ? "jsonlog" : "csvlog";
+
+        // If version < 15 and current format is jsonlog, switch to csvlog
+        if (version < 15 && this.exportForm.log_format === "jsonlog") {
+          this.exportForm.log_format = "csvlog";
+        }
+        // If version >= 15 and current format is csvlog, switch to jsonlog
+        else if (version >= 15 && this.exportForm.log_format === "csvlog") {
+          this.exportForm.log_format = "jsonlog";
+        }
+        // On initial load, set the default
+        else if (!this.exportForm.log_format) {
+          this.exportForm.log_format = defaultLogFormat;
+        }
+      },
+    },
     exportForm: {
       immediate: true,
+      deep: true,
       handler(newForm) {
         this.$emit("changingForm", newForm);
         this.$nextTick(() => {
@@ -96,7 +123,7 @@ export default {
       exportForm: {
         format: "conf",
         include_pgbadger: true,
-        log_format: "csvlog",
+        log_format: "", // Will be set by pgVersion watcher
       },
     };
   },
@@ -120,6 +147,9 @@ export default {
     },
   },
   computed: {
+    supportsJsonLog() {
+      return parseFloat(this.pgVersion) >= 15;
+    },
     showLogFormat() {
       return !this.exportForm.include_pgbadger;
     },
